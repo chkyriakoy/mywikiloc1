@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>MyWikiLoc</title>
+</head>
+<body>
+<H1> My WikiLoc App</H1>
+<h2>Please Log In</h2>
+
+
+<form action="/login" method="post">
+ Email:
+  <input type="email" name="email" required autofocus/><br/>
+  Password:
+  <input type="password" name="password" required /><br/>
+
+<input type="hidden"
+	name="${_csrf.parameterName}"
+	value="${_csrf.token}"/>
+
+ <input type="submit" value="Submit"  /><br/>
+        </form>
+
+</body>
+</html>

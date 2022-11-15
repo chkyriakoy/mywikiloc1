@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<meta charset="UTF-8">
+<title>MyWikiApp</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+<script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<H1> My WikiLoc App</H1>
+<h2>Welcome to my app</h2>
+<h3>Users List</h3>
+
+<div  th:text=*{userName}></div>
+<div  th:text=*{msg}></div>
+
+<table>
+
+<thead class="thead-dark">
+    <tr>
+       <th>User ID</th>
+            <th>User Name</th>
+            <th>User LName</th>
+            <th>User Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+   </tr>
+  </thead>
+  <tbody>
+      <tr  th:each="user : ${listUsers}">
+<td th:text="${user.id}">User ID</td>
+<td th:text="${user.name}">UserName</td>
+<td th:text="${user.lname}">UserLName</td>
+<td th:text="${user.email}">Email</td>
+<td>
+<a th:href="@{'/edit/' + ${user.id}}" th:text=*{edit}></a>
+</td>     
+<td>
+<a th:href="@{'/delete/' + ${user.id}}" th:text=*{delete} ></a>
+</td>     
+</tr>
+  
+  </tbody>
+</table>
+<form action="#" th:action="@{'/logout'}" method="post">
+<p><input type="submit" value="LogOut" />
+</form>
+
+</body>
+</html>

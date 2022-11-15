@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Route</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Route</h1>
+    <br />
+    <p th:text=*{msg}> </p>
+     <div class="col-sm-4">
+    <form action="#" th:action="@{/saveRoute}"  method="post">
+ 
+      
+<div alight="left">
+            <tr>
+                <label class="form-label" >Route Name</label>
+                <td>
+                <input type="text" name="routeName" class="form-control" value="Route Name" />
+                </td>
+            </tr>
+         </div>  
+            
+           <div alight="left">
+                <tr>
+                 <label class="form-label" >Image 1</label>
+                <td><input type="text"name="imageName1" class="form-control" value="Image Name1" /></td>
+            </tr>
+            </div>
+            <div alight="left">
+                 <tr>
+                 <label class="form-label" >Latitude</label>
+                <td><input type="text" name="latitude1" class="form-control" value="123.451" /></td>
+            </tr>
+            </div>
+             <div alight="left">
+                 <tr>
+                 <label class="form-label" >Longitude</label>
+                <td><input type="text" name="longitude1" class="form-control" value="456.781" /></td>
+           		 </tr>
+            </div>
+             <div alight="left">
+                 <tr>
+                 <label class="form-label" >Description</label>
+                <td><textarea  name="description1" class="form-control" rows="4" cols="50"> Enter Image 1 description</textarea></td>
+           		 </tr>
+            </div>
+            
+              <div alight="left">
+                <tr>
+                 <label class="form-label" >Image 2</label>
+                <td><input type="text"name="imageName2" class="form-control" value="Image Name2" /></td>
+            </tr>
+            </div>
+            <div alight="left">
+                 <tr>
+                 <label class="form-label" >Latitude</label>
+                <td><input type="text" name="latitude2" class="form-control" value="123.452" /></td>
+            </tr>
+            </div>
+             <div alight="left">
+                 <tr>
+                 <label class="form-label" >Longitude</label>
+                <td><input type="text" name="longitude2" class="form-control" value="456.782" /></td>
+           		 </tr>
+            </div>
+             <div alight="left">
+                 <tr>
+                 <label class="form-label" >Description</label>
+                <td><textarea  name="description2" class="form-control" rows="4" cols="50"> Enter Image 2 description </textarea></td>
+           		 </tr>
+            </div>
+            
+            
+             <div alight="left">
+                 <tr>
+                 <label class="form-label" >Comment</label>
+                <td><textarea  name="comment" class="form-control" rows="4" cols="50"> Enter comment</textarea></td>
+           		 </tr>
+            </div>
+            
+            
+            
+            
+            
+<br>
+ 	
+		
+            <tr>
+            <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

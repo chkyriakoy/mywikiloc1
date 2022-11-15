@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+ <head>
+<meta charset="UTF-8">
+<title>MyWikiApp</title>
+</head>
+<body>
+<H1> My WikiLoc App</H1>
+<h2>Welcome to my app</h2>
+<h2>Edit Page</h2>
+
+<form th:action="@{/saveEditedUser}" th:object="${userW}" method="post">
+    <div>
+        <input type="hidden" th:field="*{id}"/>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" placeholder="Name" />
+    </div>
+     <div>
+        <label>Last Name:</label>
+        <input type="text" th:field="*{lname}" placeholder="Last" />
+    </div>
+     <div>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" placeholder="Email" />
+    </div>
+     <div>
+        <label>Password:</label>
+        <input type="text" th:field="*{passwd}" placeholder="Password" />
+    </div>
+    <br><br>
+    
+    
+    
+   
+     <div th:field=*{roleSow1}></div>
+     
+   
+    Roles:<br>
+   
+        <label>Admin:</label>
+        <input type="checkbox" th:field="*{admin}"/>
+     <div> 
+        
+     <div th:field=*{roleSow2}></div>
+        <label>Editor:</label>
+        <input type="checkbox" th:field="*{editor}"/>
+     </div>
+      <div th:field=*{roleSow3}></div>
+        <label>Viewer:</label>
+        <input type="checkbox" th:field="*{viewer}"/>
+    </div>
+    
+    <input type="submit" value="Submit"/>
+</form>
+
+<a href="/newUser">Click here to register</a><br/>
+<a href="/showAll">Click here to show all users</a><br/>
+
+
+</body>
+</html>
