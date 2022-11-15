@@ -186,7 +186,7 @@ public class MainController {
 		 List<Route> routes = routeService.getAllUserRoutes(logedIn.getId());
 		
 		 for (Route route : routes) {
-			 System.out.println(route.toString());
+			 System.out.println("Print All routes: "+route.toString());
 		 }
 		 return "myRoutes";
 		}
