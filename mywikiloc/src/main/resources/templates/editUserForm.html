@@ -12,7 +12,7 @@
   
 
 
-<form th:action="@{/saveEditedUser}" th:object="${user}" method="post">
+<form th:action="@{/users/saveEditedUser}" th:object="${user}" method="post">
     <div>
         <input type="hidden" th:value="*{id}" th:name="id"/>
        
@@ -45,8 +45,8 @@
     <input type="submit" value="Submit"/>
 </form>
 
-<a href="/newUser">Click here to register</a><br/>
-<a href="/showAll">Click here to show all users</a><br/>
+<a href="/users/newUser">Click here to register</a><br/>
+<a href="/users/showAll">Click here to show all users</a><br/>
 
 
 </body>

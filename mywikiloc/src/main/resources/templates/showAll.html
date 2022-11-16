@@ -34,7 +34,7 @@
 <td th:text="${user.lname}">UserLName</td>
 <td th:text="${user.email}">Email</td>
 <td>
-<a th:href="@{'/edit/' + ${user.id}}" th:text=*{edit}></a>
+<a th:href="@{'/users/edit/' + ${user.id}}" th:text=*{edit}></a>
 </td>     
 <td>
 <a th:href="@{'/delete/' + ${user.id}}" th:text=*{delete} ></a>

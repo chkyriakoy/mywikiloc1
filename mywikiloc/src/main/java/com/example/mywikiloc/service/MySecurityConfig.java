@@ -49,7 +49,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
         .anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login")
+		.loginPage("/users/login")
 		.usernameParameter("email")
 		.permitAll()
 		.and()
@@ -57,8 +57,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
 		.logoutSuccessUrl("/")  
 		.permitAll()
 		.and()
-        .exceptionHandling().accessDeniedPage("/403")
-		;
+        .exceptionHandling().accessDeniedPage("/users/403")
+       	;
 	}
 	
 
