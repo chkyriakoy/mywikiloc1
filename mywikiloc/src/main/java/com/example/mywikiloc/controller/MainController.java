@@ -38,6 +38,7 @@ import com.example.mywikiloc.service.RouteService;
 import com.example.mywikiloc.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class MainController {
 	
 	@Autowired
@@ -112,7 +113,7 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String home() {
-		return "index";
+		return "/index";
 	}
 	
 	/*
@@ -294,10 +295,10 @@ public class MainController {
 		  String msg = service.updateUser(user);
 		
 		  if(msg.equals("OK")) {
-			  return "redirect:/showAll";
+			  return "redirect:/users/showAll";
 		  }
 		  else {
-			  return "redirect:/edit/"+user.getId();
+			  return "redirect:/users/edit/"+user.getId();
 		  }
 	}
 	
