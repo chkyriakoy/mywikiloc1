@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +21,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.example.mywikiloc.jwt.JwtTokenFIlter;
 import com.example.mywikiloc.jwt.JwtTokenUtil;
 
-@Configuration
+//@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(
+    prePostEnabled = false, securedEnabled = false, jsr250Enabled = true
+)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
 	
 	@Autowired
@@ -87,17 +93,31 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
 		 http.csrf().disable();
 	     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	     
-	     http.exceptionHandling().authenticationEntryPoint(
-		    		 (reuqest, response, ex) ->{
-		    			 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-		    		 }
-	    		 );
+	    
 	     
 	     http.authorizeRequests()
 	     .antMatchers("/auth/login").permitAll()
 	     .anyRequest().authenticated();
 	     
 	     http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+	     
+	     /*
+	     http.exceptionHandling().authenticationEntryPoint(
+	    		 (reuqest, response, ex) ->{
+	    			 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+	    		 }
+    		 );
+    	*/
+			     http.exceptionHandling()
+		         .authenticationEntryPoint(
+		             (request, response, ex) -> {
+		                 response.sendError(
+		                     HttpServletResponse.SC_UNAUTHORIZED,
+		                     ex.getMessage()
+		                 );
+		             }
+		     );
+			     
 	}
 
 }

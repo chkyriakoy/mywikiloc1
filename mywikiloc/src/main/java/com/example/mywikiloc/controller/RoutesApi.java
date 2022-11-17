@@ -3,6 +3,8 @@ package com.example.mywikiloc.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,10 @@ public class RoutesApi {
 	
 	
 	// curl -v localhost:8080/routes | json
+	//@GetMapping()
+	// VIEWER
 	@GetMapping()
+	@RolesAllowed({"VIEWER", "EDITOR","ADMIN" })
 	public List<Route> list() {
 		return routeService.listAll();
 	}
@@ -35,7 +40,9 @@ public class RoutesApi {
 	 * curl -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGpEb2VAbXllbWFpbC5jb20iLCJpc3MiOiJNeVdpa2lMb2MiLCJpYXQiOjE2Njg2MDI3OTIsImV4cCI6MTY2ODY4OTE5Mn0.wyimihfTJv_JmCAyehNN7PuO9uC0Tz4eDdua_Bjb88kRtiHzWZCAILzw3eWZ-DutPibEvEYK7zVgtbjepYVzsA" localhost:8080/routes
 	 * eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGpEb2VAbXllbWFpbC5jb20iLCJpc3MiOiJNeVdpa2lMb2MiLCJpYXQiOjE2Njg2MDI3OTIsImV4cCI6MTY2ODY4OTE5Mn0.wyimihfTJv_JmCAyehNN7PuO9uC0Tz4eDdua_Bjb88kRtiHzWZCAILzw3eWZ-DutPibEvEYK7zVgtbjepYVzsA
 	 */
-	@PostMapping
+	//@PostMapping()
+	@PostMapping()
+	@RolesAllowed({"EDITOR","ADMIN" })
     public ResponseEntity<Route> create(@RequestBody  Route route) {
         Integer routeId = routeService.saveRouteRerutnId(route);
         route.setId(routeId);

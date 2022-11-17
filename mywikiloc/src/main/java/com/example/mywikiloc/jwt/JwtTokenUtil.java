@@ -1,5 +1,6 @@
 package com.example.mywikiloc.jwt;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -28,8 +29,19 @@ public class JwtTokenUtil {
 	private String secretKey;
 	
 	public String generateAccessToken(User user) {
+		String[] roles = {"false","false","false"};
+		
+		if(user.isAdmin())
+			roles[0] = "true";
+		if(user.isEditor())
+			roles[1] = "true";
+		if(user.isViewer())
+			roles[2] = "true";
+		
+				
 		return Jwts.builder()
 			.setSubject(user.getId() + "," + user.getEmail())
+			.claim("roles", Arrays.toString(roles))
 			.setIssuer("MyWikiLoc")
 			.setIssuedAt(new Date())
 			.setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
@@ -59,7 +71,7 @@ public class JwtTokenUtil {
 		return parseClaims(token).getSubject();
 	}
 	
-	private Claims parseClaims(String token) {
+	public Claims parseClaims(String token) {
 		return Jwts.parser()
 				.setSigningKey(secretKey)
 				.parseClaimsJws(token)
