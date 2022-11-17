@@ -31,15 +31,12 @@ public class RouteService {
 		return routeRepo.findAll();
 	}
 	
+	
 	public List<Route> getAllUserRoutes(Integer id){
 		List<Route> routes = new ArrayList<Route>();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("usersId").is(id));
-		
 		routes = routeMongoRepo.find(query, Route.class);
-		
-		
-		
 		return routes;
 	}
 	
@@ -58,6 +55,22 @@ public class RouteService {
 		}
 		
 		return msg;
+	}
+	
+	public Integer saveRouteRerutnId(Route route) {
+		
+		int id = seqService.getSequenceNumber(Route.SEQUENCE_NAME);
+		if(id!=-1) {
+			route.setId(id);
+			routeRepo.save(route);	
+			
+		}
+		else{
+			
+			return -1;
+		}
+		
+		return route.getId();
 	}
 
 }
