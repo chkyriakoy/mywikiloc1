@@ -1,7 +1,9 @@
 package com.example.mywikiloc.controller;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -26,11 +28,39 @@ public class RoutesApi {
 	// curl -v localhost:8080/routes | json
 	//@GetMapping()
 	// VIEWER
-	@GetMapping()
-	@RolesAllowed({"VIEWER", "EDITOR","ADMIN" })
+	@GetMapping("/")
+	//@RolesAllowed({"VIEWER", "EDITOR","ADMIN" })
 	public List<Route> list() {
 		return routeService.listAll();
 	}
+	
+	@GetMapping("/test")
+	public Map<String, String> sayHello() {
+	    HashMap<String, String> map = new HashMap<>();
+	    map.put("key", "value");
+	    map.put("foo", "bar");
+	    map.put("aa", "bb");
+	    return map;
+	}
+	
+	@GetMapping("/admin")
+	public Map<String, String> sayHelloAdmin() {
+	    HashMap<String, String> map = new HashMap<>();
+	    map.put("key", "Admin");
+	    map.put("foo", "bar");
+	    map.put("aa", "bb");
+	    return map;
+	}
+	
+	@GetMapping("/editor")
+	public Map<String, String> sayHelloviewer() {
+	    HashMap<String, String> map = new HashMap<>();
+	    map.put("key", "editor");
+	    map.put("foo", "bar");
+	    map.put("aa", "bb");
+	    return map;
+	}
+	
 	
 	
 	/*
@@ -42,13 +72,15 @@ public class RoutesApi {
 	 */
 	//@PostMapping()
 	@PostMapping()
-	@RolesAllowed({"EDITOR","ADMIN" })
+	//@RolesAllowed({"EDITOR","ADMIN" })
     public ResponseEntity<Route> create(@RequestBody  Route route) {
         Integer routeId = routeService.saveRouteRerutnId(route);
         route.setId(routeId);
         URI routeURI = URI.create("/routes/" + route.getId());
         return ResponseEntity.created(routeURI).body(route);
     }
+	
+	
 	
 
 }

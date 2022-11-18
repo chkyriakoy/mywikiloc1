@@ -21,11 +21,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.example.mywikiloc.jwt.JwtTokenFIlter;
 import com.example.mywikiloc.jwt.JwtTokenUtil;
 
-//@Configuration
+@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-    prePostEnabled = false, securedEnabled = false, jsr250Enabled = true
-)
+
+//@EnableGlobalMethodSecurity(
+//    prePostEnabled = false, securedEnabled = false, jsr250Enabled = true
+//)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
 	
 	@Autowired
@@ -96,7 +97,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter  {
 	    
 	     
 	     http.authorizeRequests()
-	     .antMatchers("/auth/login").permitAll()
+	     .antMatchers("/auth/login","/routes/test").permitAll()
+	    // .antMatchers("/routes/")
+        // .anonymous()
+         .antMatchers("/routes/admin").hasAuthority("ADMIN")
+         .antMatchers("/routes/viewer").hasAnyAuthority("ADMIN", "EDITOR")
 	     .anyRequest().authenticated();
 	     
 	     http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
